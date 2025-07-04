@@ -1,16 +1,14 @@
-// const text = "This is a learning curve"
 
-// const encoder = new TextEncoder();
+import { Application, Router } from "@oak/oak";
 
-// const data = encoder.encode(text)
+const router = new Router();
 
-// Deno.writeFile("message.txt", data).then(() => {
-//     console.log("Wrote to File!")
-// })  
+router.get("/", (ctx) => {
+  ctx.response.body = "Hello from oak";
+});
 
-const handler = (req: any) => {
-    return new Response("hello there")
-}
+const app = new Application();
+app.use(router.routes());
+app.use(router.allowedMethods());
 
-
-Deno.serve({ port: 3133 }, handler);
+app.listen({port: 3133});
